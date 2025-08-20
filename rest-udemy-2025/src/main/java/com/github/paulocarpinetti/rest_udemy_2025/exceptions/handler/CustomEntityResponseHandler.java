@@ -1,6 +1,6 @@
 package com.github.paulocarpinetti.rest_udemy_2025.exceptions.handler;
 
-import com.github.paulocarpinetti.rest_udemy_2025.exceptions.ExceptionResponse;
+import com.github.paulocarpinetti.rest_udemy_2025.exceptions.ResourseNotFoundException;
 import com.github.paulocarpinetti.rest_udemy_2025.exceptions.UnsupportedMathOperationException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -28,7 +28,7 @@ public class CustomEntityResponseHandler extends ResponseEntityExceptionHandler 
     }
 
     @ExceptionHandler(UnsupportedMathOperationException.class)
-    public final ResponseEntity<ExceptionResponse> handleBadRequestExceptions(Exception ex, WebRequest request) {
+    public final ResponseEntity<ExceptionResponse> handleMathBadRequestExceptions(Exception ex, WebRequest request) {
 
         ExceptionResponse response = new ExceptionResponse(
                 new Date(),
@@ -36,5 +36,16 @@ public class CustomEntityResponseHandler extends ResponseEntityExceptionHandler 
                 request.getDescription(false)
         );
         return new ResponseEntity<>(response, HttpStatus.BAD_REQUEST);
+    }
+
+    @ExceptionHandler(ResourseNotFoundException.class)
+    public final ResponseEntity<ExceptionResponse> handleResourceNotFoundExceptions(Exception ex, WebRequest request) {
+
+        ExceptionResponse response = new ExceptionResponse(
+                new Date(),
+                ex.getMessage(),
+                request.getDescription(false)
+        );
+        return new ResponseEntity<>(response, HttpStatus.NOT_FOUND);
     }
 }

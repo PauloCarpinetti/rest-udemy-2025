@@ -1,4 +1,4 @@
-package com.github.paulocarpinetti.rest_udemy_2025.exceptions;
+package com.github.paulocarpinetti.rest_udemy_2025.exceptions.handler;
 
 import java.util.Date;
 
