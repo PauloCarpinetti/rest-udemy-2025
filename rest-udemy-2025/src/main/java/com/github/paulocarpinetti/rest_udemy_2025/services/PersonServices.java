@@ -18,24 +18,15 @@ public class PersonServices {
     public Person findById(String id){
         logger.info("Finding one Person!");
 
-        Person person = new Person();
-        person.setId(counter.incrementAndGet());
-        person.setFirstName("Paulo");
-        person.setLastName("Carpinetti");
-        person.setAddress("São Paulo - SP - Brasil");
-        person.setGender("Male");
-        return person;
+
+        return null;
     }
 
     public List<Person> findAll(){
         logger.info("Finding all People!");
-        List<Person> persons = new ArrayList<Person>();
-        for (int i = 0; i < 8; i ++){
-            Person person = mockPerson(i);
-            persons.add(person);
-        }
 
-        return persons;
+
+        return null;
     }
 
     public Person create(Person person){
@@ -58,15 +49,6 @@ public class PersonServices {
 
 
 
-    private Person mockPerson(int i){
 
-        Person person = new Person();
-        person.setId(counter.incrementAndGet());
-        person.setFirstName("First Name" + i);
-        person.setLastName("Last Name" + i);
-        person.setAddress("São Paulo - SP - Brasil");
-        person.setGender("Male");
-        return person;
-    }
 
 }
