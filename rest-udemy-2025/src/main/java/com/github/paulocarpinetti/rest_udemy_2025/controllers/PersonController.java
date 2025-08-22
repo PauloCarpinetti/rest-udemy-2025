@@ -19,7 +19,7 @@ public class PersonController {
     //private PersonServices service = new PersonServices();
 
    /*
-      Padrão antigo substituir @RequestMapping por @VerboHTTPMapping
+       Padrão antigo substituir @RequestMapping por @VerboHTTPMapping
 
     @RequestMapping(
             method = RequestMethod.GET,
