@@ -1,8 +1,13 @@
 package com.github.paulocarpinetti.rest_udemy_2025.services;
 
-import com.github.paulocarpinetti.rest_udemy_2025.exceptions.ResourseNotFoundException;
+import com.github.paulocarpinetti.rest_udemy_2025.data.dto.PersonDTO;
+import com.github.paulocarpinetti.rest_udemy_2025.exceptions.ResourceNotFoundException;
 import com.github.paulocarpinetti.rest_udemy_2025.model.Person;
 import com.github.paulocarpinetti.rest_udemy_2025.repositories.PersonRepository;
+
+import static com.github.paulocarpinetti.rest_udemy_2025.mapper.DozerMapper.parseListObjects;
+import static com.github.paulocarpinetti.rest_udemy_2025.mapper.DozerMapper.parseObject;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -20,37 +25,41 @@ public class PersonServices {
     @Autowired
     PersonRepository repository;
 
-    public Person findById(Long id){
+    public PersonDTO findById(Long id){
         logger.info("Finding one Person!");
-        return repository.findById(id)
-                .orElseThrow( () -> new ResourseNotFoundException("No records found for this ID."));
+        var entity = repository.findById(id)
+                .orElseThrow(() -> new ResourceNotFoundException("No records found for this ID!"));
+        return parseObject(entity, PersonDTO.class);
     }
 
-    public List<Person> findAll(){
+    public List<PersonDTO> findAll(){
         logger.info("Finding all People!");
-        return repository.findAll();
+        return parseListObjects(repository.findAll(), PersonDTO.class);
     }
 
-    public Person create(Person person){
+    public PersonDTO create(PersonDTO person){
         logger.info("Creating one person!");
-        return repository.save(person);
+        var entity = parseObject(person, Person.class);
+
+        return parseObject(repository.save(entity), PersonDTO.class);
     }
 
-    public Person update(Person person){
+    public PersonDTO update(PersonDTO person){
         logger.info("Updating one person!");
-        Person entity = repository.findById(person.getId())
-                .orElseThrow( () -> new ResourseNotFoundException("No records found for this ID."));
+        Person entity = repository.findById(person.getKey())
+                .orElseThrow( () -> new ResourceNotFoundException("No records found for this ID."));
         entity.setFirstName(person.getFirstName());
         entity.setLastName(person.getLastName());
         entity.setAddress(person.getAddress());
         entity.setGender(person.getGender());
-        return repository.save(entity);
+        return parseObject(repository.save(entity), PersonDTO.class);
     }
 
     public void delete(Long id){
-        logger.info("Deleting one person!");
+        logger.info("Deleting one Person!");
+
         Person entity = repository.findById(id)
-                .orElseThrow( () -> new ResourseNotFoundException("No records found for this ID."));
+                .orElseThrow(() -> new ResourceNotFoundException("No records found for this ID!"));
         repository.delete(entity);
     }
 }

@@ -1,13 +1,19 @@
 package com.github.paulocarpinetti.rest_udemy_2025.controllers;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.github.paulocarpinetti.rest_udemy_2025.data.dto.PersonDTO;
 import com.github.paulocarpinetti.rest_udemy_2025.model.Person;
 import com.github.paulocarpinetti.rest_udemy_2025.services.PersonServices;
+import static com.github.paulocarpinetti.rest_udemy_2025.mapper.DozerMapper.parseObject;
+import static com.github.paulocarpinetti.rest_udemy_2025.mapper.DozerMapper.parseListObjects;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+
+
 
 @RestController
 @RequestMapping("/person")
@@ -65,14 +71,14 @@ public class PersonController {
     @GetMapping(
             produces = MediaType.APPLICATION_JSON_VALUE
     )
-    public List<Person> findAll(){
+    public List<PersonDTO> findAll(){
         return service.findAll();
     }
 
     @GetMapping(value = "/{id}",
             produces = MediaType.APPLICATION_JSON_VALUE
     )
-    public Person findById(@PathVariable("id") Long id){
+    public PersonDTO findById(@PathVariable("id") Long id){
         return service.findById(id);
     }
 
@@ -80,7 +86,7 @@ public class PersonController {
             consumes = MediaType.APPLICATION_JSON_VALUE,
             produces = MediaType.APPLICATION_JSON_VALUE
     )
-    public Person create(@RequestBody Person person){
+    public PersonDTO create(@RequestBody PersonDTO person){
         return service.create(person);
     }
 
@@ -88,7 +94,7 @@ public class PersonController {
             consumes = MediaType.APPLICATION_JSON_VALUE,
             produces = MediaType.APPLICATION_JSON_VALUE
     )
-    public Person update(@RequestBody Person person){
+    public PersonDTO update(@RequestBody PersonDTO person){
         return service.update(person);
     }
 
