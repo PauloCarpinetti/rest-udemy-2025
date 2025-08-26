@@ -46,7 +46,7 @@ public class PersonServices {
 
     public PersonDTO update(PersonDTO person){
         logger.info("Updating one person!");
-        Person entity = repository.findById(person.getKey())
+        Person entity = repository.findById(person.getId())
                 .orElseThrow( () -> new ResourceNotFoundException("No records found for this ID."));
         entity.setFirstName(person.getFirstName());
         entity.setLastName(person.getLastName());

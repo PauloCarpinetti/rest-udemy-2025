@@ -11,7 +11,7 @@ public class PersonDTO implements Serializable {
     private static final long serialVersionUID = 1L;
 
 
-    private long key;
+    private Long id;
     private String firstName;
     private String lastName;
     private String address;
@@ -19,12 +19,12 @@ public class PersonDTO implements Serializable {
 
     public PersonDTO(){}
 
-    public long getKey() {
-        return key;
+    public Long getId() {
+        return id;
     }
 
-    public void setKey(long key) {
-        this.key = key;
+    public void setId(Long id) {
+        this.id = id;
     }
 
     public String getFirstName() {
@@ -62,11 +62,11 @@ public class PersonDTO implements Serializable {
     @Override
     public boolean equals(Object o) {
         if (!(o instanceof PersonDTO personDTO)) return false;
-        return getKey() == personDTO.getKey() && Objects.equals(getFirstName(), personDTO.getFirstName()) && Objects.equals(getLastName(), personDTO.getLastName()) && Objects.equals(getAddress(), personDTO.getAddress()) && Objects.equals(getGender(), personDTO.getGender());
+        return Objects.equals(getId(), personDTO.getId()) && Objects.equals(getFirstName(), personDTO.getFirstName()) && Objects.equals(getLastName(), personDTO.getLastName()) && Objects.equals(getAddress(), personDTO.getAddress()) && Objects.equals(getGender(), personDTO.getGender());
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(getKey(), getFirstName(), getLastName(), getAddress(), getGender());
+        return Objects.hash(getId(), getFirstName(), getLastName(), getAddress(), getGender());
     }
 }
