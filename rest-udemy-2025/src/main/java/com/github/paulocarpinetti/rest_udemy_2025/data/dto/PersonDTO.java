@@ -3,6 +3,7 @@ package com.github.paulocarpinetti.rest_udemy_2025.data.dto;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonPropertyOrder;
+import org.springframework.hateoas.RepresentationModel;
 
 import java.io.Serial;
 import java.io.Serializable;
@@ -10,7 +11,7 @@ import java.util.Objects;
 
 
 @JsonPropertyOrder({"id", "address", "firstName", "lastName", "gender"})
-public class PersonDTO implements Serializable {
+public class PersonDTO extends RepresentationModel<PersonDTO> implements Serializable {
 
     @Serial
     private static final long serialVersionUID = 1L;

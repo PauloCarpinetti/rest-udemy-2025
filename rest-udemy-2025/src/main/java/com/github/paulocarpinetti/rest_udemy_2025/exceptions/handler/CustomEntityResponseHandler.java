@@ -1,5 +1,6 @@
 package com.github.paulocarpinetti.rest_udemy_2025.exceptions.handler;
 
+import com.github.paulocarpinetti.rest_udemy_2025.exceptions.RequiredObjectIsNullException;
 import com.github.paulocarpinetti.rest_udemy_2025.exceptions.ResourceNotFoundException;
 import com.github.paulocarpinetti.rest_udemy_2025.exceptions.UnsupportedMathOperationException;
 import org.springframework.http.HttpStatus;
@@ -47,5 +48,16 @@ public class CustomEntityResponseHandler extends ResponseEntityExceptionHandler 
                 request.getDescription(false)
         );
         return new ResponseEntity<>(response, HttpStatus.NOT_FOUND);
+    }
+
+    @ExceptionHandler(RequiredObjectIsNullException.class)
+    public final ResponseEntity<ExceptionResponse> handleRequiredObjectIsNullExceptions(Exception ex, WebRequest request) {
+
+        ExceptionResponse response = new ExceptionResponse(
+                new Date(),
+                ex.getMessage(),
+                request.getDescription(false)
+        );
+        return new ResponseEntity<>(response, HttpStatus.BAD_REQUEST);
     }
 }
