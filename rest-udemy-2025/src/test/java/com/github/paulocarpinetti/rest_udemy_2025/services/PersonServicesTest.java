@@ -163,13 +163,12 @@ class PersonServicesTest {
     @Test
     void update() {
         Person person = input.mockEntity(1);
-        Person persisted = person;
-        persisted.setId(1L);
+        person.setId(1L);
 
         PersonDTO dto = input.mockDTO();
 
         when(repository.findById(1L)).thenReturn(Optional.of(person));
-        when(repository.save(person)).thenReturn(persisted);
+        when(repository.save(person)).thenReturn(person);
 
         var result = service.update(dto);
 
