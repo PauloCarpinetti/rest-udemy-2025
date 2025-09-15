@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
+//@CrossOrigin(origins = "http://localhost:8080")
 @RestController
 @RequestMapping("api/books/v1")
 @Tag(name = "Books", description = "Endpoints for Managing Books." )
@@ -48,6 +49,7 @@ public class BookControllerV1 {
 
     }
 
+    //@CrossOrigin(origins = {"http://localhost:8080"})
     @GetMapping(value = "/{id}")
     @Operation(summary = "Finds one Book.", description = "Finds one Book.",
             tags = {"Books"},
@@ -71,6 +73,7 @@ public class BookControllerV1 {
         return service.findById(id);
     }
 
+    //@CrossOrigin(origins = {"http://localhost:8080"})
     @PostMapping
     @Operation(summary = "Creates a new book.", description = "Creates a new book.",
             tags = {"Books"},
