@@ -1,4 +1,4 @@
-package com.github.paulocarpinetti.rest_udemy_2025.services;
+package com.github.paulocarpinetti.rest_udemy_2025.unittests.services;
 
 import com.github.paulocarpinetti.rest_udemy_2025.controllers.BookControllerV1;
 import com.github.paulocarpinetti.rest_udemy_2025.data.dto.BookDTO;

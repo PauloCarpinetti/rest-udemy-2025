@@ -4,12 +4,13 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 import org.springframework.hateoas.RepresentationModel;
+import org.springframework.hateoas.server.core.Relation;
 
 import java.io.Serial;
 import java.io.Serializable;
 import java.util.Objects;
 
-
+@Relation(collectionRelation = "people")
 @JsonPropertyOrder({"id", "address", "firstName", "lastName", "gender"})
 public class PersonDTO extends RepresentationModel<PersonDTO> implements Serializable {
 

@@ -1,4 +1,4 @@
-package com.github.paulocarpinetti.rest_udemy_2025.services;
+package com.github.paulocarpinetti.rest_udemy_2025.unittests.services;
 
 import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.linkTo;
 import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.methodOn;
@@ -12,18 +12,16 @@ import com.github.paulocarpinetti.rest_udemy_2025.exceptions.ResourceNotFoundExc
 import com.github.paulocarpinetti.rest_udemy_2025.model.Person;
 import com.github.paulocarpinetti.rest_udemy_2025.repositories.PersonRepository;
 
-import static com.github.paulocarpinetti.rest_udemy_2025.mapper.DozerMapper.parseListObjects;
 import static com.github.paulocarpinetti.rest_udemy_2025.mapper.DozerMapper.parseObject;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.hateoas.server.mvc.WebMvcLinkBuilder;
 import org.springframework.stereotype.Service;
 import org.springframework.data.domain.Pageable;
-import org.springframework.data.web.PagedResourcesAssembler;
 import org.springframework.hateoas.EntityModel;
 import org.springframework.hateoas.Link;
 import org.springframework.hateoas.PagedModel;
-import java.util.List;
+
 import java.util.concurrent.atomic.AtomicLong;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -55,6 +53,28 @@ public class PersonServices {
         logger.info("Finding all People!");
 
         var people = repository.findAll(pageable);
+
+        var peopleWithLinks = people.map(person -> {
+            var dto = parseObject(person, PersonDTO.class);
+            addHateoasLinks(dto);
+            return dto;
+        });
+
+        Link findAllLink = WebMvcLinkBuilder.linkTo(
+                        WebMvcLinkBuilder.methodOn(PersonController.class)
+                                .findAll(
+                                        pageable.getPageNumber(),
+                                        pageable.getPageSize(),
+                                        String.valueOf(pageable.getSort())))
+                .withSelfRel();
+        return assembler.toModel(peopleWithLinks, findAllLink);
+    }
+
+    public PagedModel<EntityModel<PersonDTO>> findByName(String firstName, Pageable pageable) {
+
+        logger.info("Finding People by name!");
+
+        var people = repository.findPersonsByName(firstName, pageable);
 
         var peopleWithLinks = people.map(person -> {
             var dto = parseObject(person, PersonDTO.class);
