@@ -86,5 +86,4 @@ public class PersonDTO extends RepresentationModel<PersonDTO> implements Seriali
     public int hashCode() {
         return Objects.hash(super.hashCode(), getId(), getFirstName(), getLastName(), getAddress(), getGender(), isEnabled());
     }
-
 }

@@ -9,7 +9,7 @@ import org.junit.jupiter.api.Test;
 
 import java.util.List;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.*;
 
 public class DozerConverterTest {
 
@@ -28,6 +28,7 @@ public class DozerConverterTest {
         assertEquals("Last Name Test0", output.getLastName());
         assertEquals("Address Test0", output.getAddress());
         assertEquals("Male", output.getGender());
+        assertTrue(output.isEnabled());
     }
 
     @Test

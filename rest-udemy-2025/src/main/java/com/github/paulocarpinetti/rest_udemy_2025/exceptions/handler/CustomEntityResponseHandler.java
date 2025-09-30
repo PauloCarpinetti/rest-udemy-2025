@@ -1,8 +1,6 @@
 package com.github.paulocarpinetti.rest_udemy_2025.exceptions.handler;
 
-import com.github.paulocarpinetti.rest_udemy_2025.exceptions.RequiredObjectIsNullException;
-import com.github.paulocarpinetti.rest_udemy_2025.exceptions.ResourceNotFoundException;
-import com.github.paulocarpinetti.rest_udemy_2025.exceptions.UnsupportedMathOperationException;
+import com.github.paulocarpinetti.rest_udemy_2025.exceptions.*;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.ControllerAdvice;
@@ -60,4 +58,29 @@ public class CustomEntityResponseHandler extends ResponseEntityExceptionHandler 
         );
         return new ResponseEntity<>(response, HttpStatus.BAD_REQUEST);
     }
+
+    @ExceptionHandler(InvalidJwtAuthenticationException.class)
+    public final ResponseEntity<ExceptionResponse> handleInvalidJwtAuthenticationExceptions(
+            Exception ex, WebRequest request) {
+
+        ExceptionResponse exceptionResponse = new ExceptionResponse(
+                new Date(),
+                ex.getMessage(),
+                request.getDescription(false));
+
+        return new ResponseEntity<>(exceptionResponse, HttpStatus.FORBIDDEN);
+    }
+
+    @ExceptionHandler(UserAlreadyExistsException.class)
+    public final ResponseEntity<ExceptionResponse> handleUserAlreadyExistsExceptions(
+            Exception ex, WebRequest request) {
+
+        ExceptionResponse exceptionResponse = new ExceptionResponse(
+                new Date(),
+                ex.getMessage(),
+                request.getDescription(false));
+
+        return new ResponseEntity<>(exceptionResponse, HttpStatus.BAD_REQUEST);
+    }
+
 }

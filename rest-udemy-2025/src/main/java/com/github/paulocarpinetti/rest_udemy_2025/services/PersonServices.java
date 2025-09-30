@@ -1,4 +1,4 @@
-package com.github.paulocarpinetti.rest_udemy_2025.unittests.services;
+package com.github.paulocarpinetti.rest_udemy_2025.services;
 
 import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.linkTo;
 import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.methodOn;

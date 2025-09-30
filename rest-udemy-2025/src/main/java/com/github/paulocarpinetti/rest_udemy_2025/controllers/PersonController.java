@@ -2,7 +2,7 @@ package com.github.paulocarpinetti.rest_udemy_2025.controllers;
 
 import com.github.paulocarpinetti.rest_udemy_2025.controllers.docs.PersonControllerDocs;
 import com.github.paulocarpinetti.rest_udemy_2025.data.dto.PersonDTO;
-import com.github.paulocarpinetti.rest_udemy_2025.unittests.services.PersonServices;
+import com.github.paulocarpinetti.rest_udemy_2025.services.PersonServices;
 
 import io.swagger.v3.oas.annotations.tags.Tag;
 import org.springframework.beans.factory.annotation.Autowired;
